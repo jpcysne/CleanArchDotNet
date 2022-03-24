@@ -1,4 +1,5 @@
 using CleanArch.Infra.Data.Context;
+using CleanArch.Infra.IoC;
 using CleanArch.Mvc.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,8 @@ namespace CleanArch.Mvc
             });
 
             services.AddRazorPages();
+
+            RegisterService(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +66,11 @@ namespace CleanArch.Mvc
             {
                 endpoints.MapRazorPages();
             });
+        }
+
+        private static void RegisterService(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }
